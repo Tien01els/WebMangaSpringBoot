@@ -21,6 +21,7 @@ public class Account {
     private String password;
     private boolean isActive;
     private User user;
+    private int role;
 
     public Account(AccountDTO account) {
         this.id = account.getId();
@@ -28,5 +29,6 @@ public class Account {
         this.password = account.getPassword();
         this.isActive = account.isActive();
         this.user = new User(account.getUser());
+        this.role = account.getRole();
     }
 }
