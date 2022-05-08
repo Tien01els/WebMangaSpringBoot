@@ -1,4 +1,4 @@
-package com.example.webmanga.entities;
+package com.example.webmanga.entities.embedded;
 
 import com.example.webmanga.dtos.UserDTO;
 import lombok.*;
@@ -11,19 +11,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "User")
 public class User {
-    @Transient
-    public static final String SEQUENCE_NAME = "users_sequence";
-    @Id
-    private Long id;
     private String fullname;
     private int age;
     private String gender;
     private String email;
 
     public User(UserDTO user) {
-        this.id = user.getId();
         this.fullname = user.getName();
         this.age = user.getAge();
         this.gender = user.getGender();

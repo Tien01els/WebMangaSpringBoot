@@ -1,9 +1,9 @@
 package com.example.webmanga.entities;
 
 import com.example.webmanga.dtos.AccountDTO;
+import com.example.webmanga.entities.embedded.User;
 import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -13,8 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "Account")
 public class Account {
-    @Transient
-    public static final String SEQUENCE_NAME = "accounts_sequence";
     @Id
     private Long id;
     private String username;

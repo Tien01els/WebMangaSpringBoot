@@ -1,9 +1,7 @@
 package com.example.webmanga.controllers;
 
 import com.example.webmanga.dtos.AccountDTO;
-import com.example.webmanga.dtos.UserDTO;
-import com.example.webmanga.entities.ResponseObject;
-import com.example.webmanga.entities.User;
+import com.example.webmanga.dtos.ResponseObject;
 import com.example.webmanga.services.SequenceGeneratorService;
 import com.example.webmanga.services.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +25,6 @@ public class AccountController {
 
     @PostMapping("/register")
     public ResponseEntity<ResponseObject> register(@RequestBody AccountDTO accountDTO) {
-        UserDTO user = new UserDTO();
-        user.setId(sequenceGenerator.generateSequence(User.SEQUENCE_NAME));
-        user.setName(accountDTO.getUserName());
-        accountDTO.setId(sequenceGenerator.generateSequence(AccountDTO.SEQUENCE_NAME));
-        accountDTO.setUser(user);
-        accountDTO.setActive(true);
-        accountDTO.setRole(0);
         return ResponseEntity.ok(accountService.createAccount(accountDTO));
     }
 
@@ -44,13 +35,6 @@ public class AccountController {
 
     @PostMapping("/provideAccount")
     public ResponseEntity<ResponseObject> provideAccount(@RequestBody AccountDTO accountDTO) {
-        UserDTO user = new UserDTO();
-        user.setId(sequenceGenerator.generateSequence(User.SEQUENCE_NAME));
-        user.setName(accountDTO.getUserName());
-        accountDTO.setId(sequenceGenerator.generateSequence(AccountDTO.SEQUENCE_NAME));
-        accountDTO.setUser(user);
-        accountDTO.setActive(true);
-        accountDTO.setRole(1);
         return ResponseEntity.ok(accountService.createAccount(accountDTO));
     }
 
