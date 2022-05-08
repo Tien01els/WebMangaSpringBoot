@@ -1,9 +1,7 @@
 package com.example.webmanga.dtos;
 
 import com.example.webmanga.entities.Account;
-import com.example.webmanga.entities.User;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 
 @Setter
