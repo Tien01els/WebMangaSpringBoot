@@ -6,7 +6,6 @@ import com.example.webmanga.entities.ResponseObject;
 import com.example.webmanga.repositories.AccountRepository;
 import com.example.webmanga.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -38,6 +37,28 @@ public class AccountServiceImpl implements AccountService {
         if (!Objects.isNull(account)) {
             return new ResponseObject("Fail", "Account already exists", "");
         }
-        return new ResponseObject("Success", "Register successfully", new AccountDTO(accountRepository.save(account)));
+        if (accountDTO.getRole() == 1)
+            accountDTO.setPassword("1");
+        return new ResponseObject("Success", "Register successfully",
+                new AccountDTO(accountRepository.save(new Account(accountDTO))));
+    }
+
+    @Override
+    public ResponseObject banAccount(Long id) {
+        Account account = accountRepository.findById(id)
+                .map(accountBanned -> {
+                    accountBanned.setActive(false);
+                    return accountRepository.save(accountBanned);
+                }).orElseGet(() -> {
+                    return null;
+                });
+        if (Objects.isNull(account))
+        {
+            return new ResponseObject("Fail", "Ban failure", "");
+        }
+        else if (!account.isActive()) {
+            return new ResponseObject("Fail", "Account is banned", "");
+        }
+        return new ResponseObject("Success", "Register successfully", new AccountDTO(account));
     }
 }

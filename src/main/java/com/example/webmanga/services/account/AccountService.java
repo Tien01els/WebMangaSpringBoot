@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service;
 public interface AccountService {
     ResponseObject checkLogin(AccountDTO accountDTO);
     ResponseObject createAccount(AccountDTO accountDTO);
+    ResponseObject banAccount(Long id);
 }

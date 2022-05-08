@@ -33,6 +33,24 @@ public class AccountController {
         accountDTO.setId(sequenceGenerator.generateSequence(AccountDTO.SEQUENCE_NAME));
         accountDTO.setUser(user);
         accountDTO.setActive(true);
+        accountDTO.setRole(0);
+        return ResponseEntity.ok(accountService.createAccount(accountDTO));
+    }
+
+    @PutMapping("/banAccount/{idUser}")
+    public ResponseEntity<ResponseObject> banAccount(@PathVariable Long idUser) {
+        return ResponseEntity.ok(accountService.banAccount(idUser));
+    }
+
+    @PostMapping("/provideAccount")
+    public ResponseEntity<ResponseObject> provideAccount(@RequestBody AccountDTO accountDTO) {
+        UserDTO user = new UserDTO();
+        user.setId(sequenceGenerator.generateSequence(User.SEQUENCE_NAME));
+        user.setName(accountDTO.getUserName());
+        accountDTO.setId(sequenceGenerator.generateSequence(AccountDTO.SEQUENCE_NAME));
+        accountDTO.setUser(user);
+        accountDTO.setActive(true);
+        accountDTO.setRole(1);
         return ResponseEntity.ok(accountService.createAccount(accountDTO));
     }
 
