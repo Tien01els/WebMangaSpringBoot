@@ -1,7 +1,7 @@
 package com.example.webmanga.controllers;
 
 import com.example.webmanga.dtos.AccountDTO;
-import com.example.webmanga.dtos.ResponseObject;
+import com.example.webmanga.response.ResponseObject;
 import com.example.webmanga.services.SequenceGeneratorService;
 import com.example.webmanga.services.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;

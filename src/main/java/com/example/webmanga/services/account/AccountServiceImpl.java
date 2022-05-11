@@ -3,7 +3,7 @@ package com.example.webmanga.services.account;
 import com.example.webmanga.dtos.AccountDTO;
 import com.example.webmanga.dtos.UserDTO;
 import com.example.webmanga.entities.Account;
-import com.example.webmanga.dtos.ResponseObject;
+import com.example.webmanga.response.ResponseObject;
 import com.example.webmanga.repositories.AccountRepository;
 import com.example.webmanga.services.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
