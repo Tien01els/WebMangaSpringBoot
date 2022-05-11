@@ -1,4 +1,4 @@
-package com.example.webmanga.dtos;
+package com.example.webmanga.response;
 
 import com.example.webmanga.dtos.AccountDTO;
 import lombok.*;

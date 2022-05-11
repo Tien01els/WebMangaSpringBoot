@@ -1,6 +1,6 @@
 package com.example.webmanga.entities;
 
-import com.example.webmanga.Mode;
+import com.example.webmanga.enums.Mode;
 import com.example.webmanga.dtos.ComicDTO;
 import com.example.webmanga.entities.embedded.User;
 import lombok.*;

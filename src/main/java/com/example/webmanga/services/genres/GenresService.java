@@ -1,7 +1,7 @@
 package com.example.webmanga.services.genres;
 
 import com.example.webmanga.dtos.GenresDTO;
-import com.example.webmanga.dtos.ResponseObject;
+import com.example.webmanga.response.ResponseObject;
 import org.springframework.stereotype.Service;
 
 @Service

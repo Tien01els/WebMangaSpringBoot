@@ -1,7 +1,7 @@
 package com.example.webmanga.services.comic;
 
 import com.example.webmanga.dtos.ComicDTO;
-import com.example.webmanga.dtos.ResponseObject;
+import com.example.webmanga.response.ResponseObject;
 import com.example.webmanga.entities.Comic;
 import com.example.webmanga.repositories.ComicRepository;
 import org.springframework.beans.factory.annotation.Autowired;

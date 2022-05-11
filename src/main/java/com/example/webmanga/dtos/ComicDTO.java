@@ -1,6 +1,6 @@
 package com.example.webmanga.dtos;
 
-import com.example.webmanga.Mode;
+import com.example.webmanga.enums.Mode;
 import com.example.webmanga.entities.Comic;
 import lombok.*;
 import org.springframework.data.annotation.Transient;

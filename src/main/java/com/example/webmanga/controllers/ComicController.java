@@ -1,7 +1,7 @@
 package com.example.webmanga.controllers;
 
 import com.example.webmanga.dtos.ComicDTO;
-import com.example.webmanga.dtos.ResponseObject;
+import com.example.webmanga.response.ResponseObject;
 import com.example.webmanga.services.comic.ComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.example.webmanga;
+package com.example.webmanga.enums;
 
 public enum Mode {
     PRIVATE,

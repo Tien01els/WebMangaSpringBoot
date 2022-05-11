@@ -1,7 +1,7 @@
 package com.example.webmanga.services.account;
 
 import com.example.webmanga.dtos.AccountDTO;
-import com.example.webmanga.dtos.ResponseObject;
+import com.example.webmanga.response.ResponseObject;
 import org.springframework.stereotype.Service;
 
 @Service
