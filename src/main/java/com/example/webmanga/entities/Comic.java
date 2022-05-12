@@ -1,5 +1,6 @@
 package com.example.webmanga.entities;
 
+import com.example.webmanga.entities.embedded.Chapter;
 import com.example.webmanga.enums.Mode;
 import com.example.webmanga.dtos.ComicDTO;
 import com.example.webmanga.entities.embedded.User;
@@ -7,6 +8,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,32 +17,46 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Document(collection = "Comic")
 public class Comic {
     @Id
     private Long id;
     private String comicName;
-    private List<User> author;
-    private List<Genres> genres;
+    private List<Long> author;
+    private List<Long> genres;
     private String status;
     private Long view;
     private String content;
     private Date lastUpdate;
     private Mode shareMode;
+    private List<Chapter> listChap;
 
     public Comic(ComicDTO comic) {
         this.id = comic.getId();
         this.comicName = comic.getComicName();
         comic.getAuthor().forEach(author -> {
-            this.author.add(new User(author));
+            if (this.author == null) {
+                this.author = new ArrayList<>();
+            }
+            this.author.add(author);
         });
         comic.getGenres().forEach(genre -> {
-            this.genres.add(new Genres(genre));
+            if (this.genres == null) {
+                this.genres = new ArrayList<>();
+            }
+            this.genres.add(genre);
         });
         this.status = comic.getStatus();
         this.view = comic.getView();
         this.content = comic.getContent();
         this.lastUpdate = comic.getLastUpdate();
         this.shareMode = comic.getShareMode();
+        comic.getListChap().forEach(chapter -> {
+            if (this.listChap == null) {
+                this.listChap = new ArrayList<>();
+            }
+            this.listChap.add(new Chapter(chapter));
+        });
     }
 }

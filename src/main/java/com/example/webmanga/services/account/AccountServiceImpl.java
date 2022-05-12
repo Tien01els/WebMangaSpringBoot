@@ -3,6 +3,7 @@ package com.example.webmanga.services.account;
 import com.example.webmanga.dtos.AccountDTO;
 import com.example.webmanga.dtos.UserDTO;
 import com.example.webmanga.entities.Account;
+import com.example.webmanga.global.GlobalVariable;
 import com.example.webmanga.response.ResponseObject;
 import com.example.webmanga.repositories.AccountRepository;
 import com.example.webmanga.services.SequenceGeneratorService;
@@ -29,6 +30,7 @@ public class AccountServiceImpl implements AccountService {
         {
             return new ResponseObject("Fail", "Password invalid", "");
         }
+        GlobalVariable.accountID = account.getId();
         return new ResponseObject("Success", "Logged in successfully", new AccountDTO(account));
     }
 
