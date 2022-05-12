@@ -11,7 +11,7 @@ import org.springframework.data.annotation.Transient;
 @NoArgsConstructor
 public class GenresDTO {
     @Transient
-    public static final String SEQUENCE_NAME = "accounts_sequence";
+    public static final String SEQUENCE_NAME = "genres_sequence";
     private Long id;
     private String name;
     private String description;
