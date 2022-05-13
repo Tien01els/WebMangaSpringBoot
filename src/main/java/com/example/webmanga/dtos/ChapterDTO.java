@@ -14,10 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 
 public class ChapterDTO {
+    private Integer chapterNumber;
     private String chapterName;
     private List<String> listChapterURL;
 
     public ChapterDTO(Chapter chapter) {
+        this.chapterNumber = chapter.getChapterNumber();
         this.chapterName = chapter.getChapterName();
         chapter.getListChapterURL().forEach(url -> {
             if (this.listChapterURL == null) {

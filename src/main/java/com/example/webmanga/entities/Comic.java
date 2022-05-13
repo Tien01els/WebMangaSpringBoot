@@ -24,7 +24,7 @@ public class Comic {
     private Long id;
     private String comicName;
     private List<Long> author;
-    private List<Long> genres;
+    private List<String> genres;
     private String status;
     private Long view;
     private String content;

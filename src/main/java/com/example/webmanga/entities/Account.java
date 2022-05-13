@@ -6,6 +6,9 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -20,6 +23,7 @@ public class Account {
     private boolean isActive;
     private User user;
     private int role;
+    private List<Long> subscribeComicList;
 
     public Account(AccountDTO account) {
         this.id = account.getId();
@@ -28,5 +32,11 @@ public class Account {
         this.isActive = account.isActive();
         this.user = new User(account.getUser());
         this.role = account.getRole();
+        account.getSubscribeComicList().forEach(subscribeComic -> {
+            if (this.subscribeComicList == null) {
+                this.subscribeComicList = new ArrayList<>();
+            }
+            this.subscribeComicList.add(subscribeComic);
+        });
     }
 }

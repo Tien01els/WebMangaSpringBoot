@@ -4,6 +4,9 @@ import com.example.webmanga.entities.Account;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter
 @Getter
 @ToString
@@ -18,6 +21,7 @@ public class AccountDTO {
     private boolean isActive;
     private UserDTO user;
     private int role;
+    private List<Long> subscribeComicList;
 
     public AccountDTO(Account account) {
         this.id = account.getId();
@@ -26,6 +30,12 @@ public class AccountDTO {
         this.isActive = account.isActive();
         this.user = new UserDTO(account.getUser());
         this.role = account.getRole();
+        account.getSubscribeComicList().forEach(subscribeComic -> {
+            if (this.subscribeComicList == null) {
+                this.subscribeComicList = new ArrayList<>();
+            }
+            this.subscribeComicList.add(subscribeComic);
+        });
     }
 
 }

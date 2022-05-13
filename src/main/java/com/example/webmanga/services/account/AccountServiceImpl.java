@@ -61,20 +61,17 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public ResponseObject banAccount(Long id) {
-        Account account = accountRepository.findById(id)
-                .map(accountBanned -> {
-                    accountBanned.setActive(false);
-                    return accountRepository.save(accountBanned);
+        Account accountBanned = accountRepository.findById(id)
+                .map(account -> {
+                    account.setActive(false);
+                    return accountRepository.save(account);
                 }).orElseGet(() -> {
                     return null;
                 });
-        if (Objects.isNull(account))
+        if (Objects.isNull(accountBanned))
         {
             return new ResponseObject("Fail", "Ban failure", "");
         }
-        else if (!account.isActive()) {
-            return new ResponseObject("Fail", "Account is banned", "");
-        }
-        return new ResponseObject("Success", "Register successfully", new AccountDTO(account));
+        return new ResponseObject("Success", "Ban successfully", new AccountDTO(accountBanned));
     }
 }

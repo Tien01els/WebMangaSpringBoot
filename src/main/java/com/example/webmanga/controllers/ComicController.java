@@ -5,10 +5,7 @@ import com.example.webmanga.response.ResponseObject;
 import com.example.webmanga.services.comic.ComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/comic")
@@ -19,5 +16,20 @@ public class ComicController {
     @PostMapping("/addComic")
     public ResponseEntity<ResponseObject> addComic(@RequestBody ComicDTO comic) {
         return ResponseEntity.ok(comicService.addComic(comic));
+    }
+
+    @PutMapping("/editComic")
+    public ResponseEntity<ResponseObject> editComic(@RequestBody ComicDTO comic) {
+        return ResponseEntity.ok(comicService.editComic(comic));
+    }
+
+    @GetMapping("/getComicInfo/{id}")
+    public ResponseEntity<ResponseObject> getComic(@PathVariable Long id) {
+        return ResponseEntity.ok(comicService.getComic(id));
+    }
+
+    @GetMapping("/searchComics")
+    public ResponseEntity<ResponseObject> searchComics(@RequestParam String name) {
+        return ResponseEntity.ok(comicService.searchComics(name));
     }
 }
