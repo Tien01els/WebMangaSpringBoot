@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ComicRepository extends MongoRepository<Comic, Long> {
-    @Query("{'comicName': {$regex: ?0}}")
+    @Query("{'comicName': { $regex: ?0 }}")
     List<Comic> findByName(String comicName);
 }
