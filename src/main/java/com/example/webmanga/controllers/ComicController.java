@@ -29,7 +29,7 @@ public class ComicController {
     }
 
     @GetMapping("/searchComics")
-    public ResponseEntity<ResponseObject> searchComics(@RequestParam String name) {
-        return ResponseEntity.ok(comicService.searchComics(name));
+    public ResponseEntity<ResponseObject> searchComics(@RequestParam String search) {
+        return ResponseEntity.ok(comicService.searchComics(search));
     }
 }

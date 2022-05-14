@@ -55,10 +55,7 @@ public class ComicServiceImpl implements ComicService {
     @Override
     public ResponseObject searchComics(String name) {
         List<ComicDTO> comicDTOList = new ArrayList<>();
-        String comicName = name + "?";
-        Query query = new Query();
-        query.addCriteria(Criteria.where("comicName").regex(comicName));
-        List<Comic> comicList = mongoTemplate.find(query, Comic.class);
+        List<Comic> comicList = comicRepository.findByName(name + "?");
         comicList.forEach(comic -> {
             comicDTOList.add(new ComicDTO(comic));
         });

@@ -2,7 +2,6 @@ package com.example.webmanga.controllers;
 
 import com.example.webmanga.dtos.AccountDTO;
 import com.example.webmanga.response.ResponseObject;
-import com.example.webmanga.services.SequenceGeneratorService;
 import com.example.webmanga.services.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +14,6 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @Autowired
-    private SequenceGeneratorService sequenceGenerator;
 
     @GetMapping("/login")
     public ResponseEntity<ResponseObject> login(@RequestBody AccountDTO accountDTO) {
