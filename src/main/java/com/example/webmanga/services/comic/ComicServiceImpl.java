@@ -22,7 +22,6 @@ public class ComicServiceImpl implements ComicService {
 
     @Override
     public ResponseObject addComic(ComicDTO comicDTO) {
-        //comicDTO.setId(sequenceGenerator.generateSequence(ComicDTO.SEQUENCE_NAME));
         return new ResponseObject("Success", "Add comic successfully",
                 new ComicDTO(comicRepository.save(new Comic(comicDTO))));
     }
@@ -40,22 +39,21 @@ public class ComicServiceImpl implements ComicService {
     }
 
     @Override
-    public ResponseObject getComic(Long id) {
-        Comic comic = comicRepository.findById(id)
+    public ResponseObject getComicInfo(String id) {
+        Comic comic = comicRepository.findComicById(id)
                 .map(comicFound -> {
                     return comicFound;
                 }).orElseGet(() -> { return null; });
         if (comic == null) {
             return new ResponseObject("Fail", "Comic not found", "");
         }
-        return new ResponseObject("Success", "Updated successfully", new ComicDTO(comic));
+        return new ResponseObject("Success", "Get comic successfully", new ComicDTO(comic));
     }
-    @Autowired
-    MongoTemplate mongoTemplate;
+
     @Override
     public ResponseObject searchComics(String name) {
         List<ComicDTO> comicDTOList = new ArrayList<>();
-        List<Comic> comicList = comicRepository.findByName(name + "?");
+        List<Comic> comicList = comicRepository.findByName(name);
         comicList.forEach(comic -> {
             comicDTOList.add(new ComicDTO(comic));
         });

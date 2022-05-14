@@ -23,7 +23,7 @@ public class Comic {
     @Id
     private String id;
     private String comicName;
-    private List<Long> author;
+    private List<String> author;
     private List<String> genres;
     private String status;
     private Long view;
@@ -33,6 +33,7 @@ public class Comic {
     private List<Chapter> listChap;
 
     public Comic(ComicDTO comic) {
+        this.id = comic.getId();
         this.comicName = comic.getComicName();
         comic.getAuthor().forEach(author -> {
             if (this.author == null) {

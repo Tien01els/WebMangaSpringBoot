@@ -8,5 +8,7 @@ import org.springframework.stereotype.Service;
 public interface AccountService {
     ResponseObject checkLogin(AccountDTO accountDTO);
     ResponseObject createAccount(AccountDTO accountDTO);
-    ResponseObject banAccount(Long id);
+    ResponseObject banAccount(String id);
+    ResponseObject editAccount(AccountDTO accountDTO);
+    ResponseObject subComic(String id, String idComic);
 }

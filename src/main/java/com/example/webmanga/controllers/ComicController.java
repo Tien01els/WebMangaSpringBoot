@@ -24,12 +24,14 @@ public class ComicController {
     }
 
     @GetMapping("/getComicInfo/{id}")
-    public ResponseEntity<ResponseObject> getComic(@PathVariable Long id) {
-        return ResponseEntity.ok(comicService.getComic(id));
+    public ResponseEntity<ResponseObject> getComicInfo(@PathVariable String id) {
+        return ResponseEntity.ok(comicService.getComicInfo(id));
     }
 
     @GetMapping("/searchComics")
     public ResponseEntity<ResponseObject> searchComics(@RequestParam String search) {
         return ResponseEntity.ok(comicService.searchComics(search));
     }
+
+
 }

@@ -2,7 +2,6 @@ package com.example.webmanga.dtos;
 
 import com.example.webmanga.entities.embedded.Chapter;
 import lombok.*;
-import org.springframework.data.annotation.Transient;
 
 import java.util.ArrayList;
 import java.util.List;

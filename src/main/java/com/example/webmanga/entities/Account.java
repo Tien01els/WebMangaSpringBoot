@@ -20,16 +20,16 @@ public class Account {
     private String id;
     private String username;
     private String password;
-    private boolean isActive;
+    private Boolean isActive;
     private User user;
-    private int role;
-    private List<Long> subscribeComicList;
+    private Integer role;
+    private List<String> subscribeComicList;
 
     public Account(AccountDTO account) {
         this.id = account.getId();
         this.username = account.getUserName();
         this.password = account.getPassword();
-        this.isActive = account.isActive();
+        this.isActive = account.getIsActive();
         this.user = new User(account.getUser());
         this.role = account.getRole();
         if(account.getSubscribeComicList() != null)

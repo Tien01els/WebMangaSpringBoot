@@ -8,6 +8,7 @@ import com.example.webmanga.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Component
@@ -17,20 +18,32 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public ResponseObject checkLogin(AccountDTO accountDTO) {
-        Account account = accountRepository.findAccountByUsername(accountDTO.getUserName());
+        Account account = accountRepository.findAccountByUsername(accountDTO.getUserName())
+                                .map(accountCheck -> {
+                                    return accountCheck;
+                                }).orElseGet(() -> {
+                                    return null;
+                                });
         if (Objects.isNull(account)) {
             return new ResponseObject("Fail", "Account invalid", "");
         }
         else if (!accountDTO.getPassword().equals(account.getPassword()))
         {
             return new ResponseObject("Fail", "Password invalid", "");
+        } else if (!account.getIsActive()) {
+            return new ResponseObject("Fail", "Account is banned", "");
         }
         return new ResponseObject("Success", "Logged in successfully", new AccountDTO(account));
     }
 
     @Override
     public ResponseObject createAccount(AccountDTO accountDTO) {
-        Account account = accountRepository.findAccountByUsername(accountDTO.getUserName());
+        Account account = accountRepository.findAccountByUsername(accountDTO.getUserName())
+                                .map(accountCheck -> {
+                                    return accountCheck;
+                                }).orElseGet(() -> {
+                                    return null;
+                                });
 
         if (!Objects.isNull(account)) {
             return new ResponseObject("Fail", "Account already exists", "");
@@ -38,29 +51,18 @@ public class AccountServiceImpl implements AccountService {
 
         UserDTO user = new UserDTO();
         user.setName(accountDTO.getUserName());
-        //accountDTO.setId(sequenceGenerator.generateSequence(AccountDTO.SEQUENCE_NAME));
         accountDTO.setUser(user);
-        accountDTO.setActive(true);
-
-        if (accountDTO.getRole() == 1) {
-            accountDTO.setPassword("1");
-            accountDTO.setRole(1);
-        } else if (accountDTO.getRole() == 0) {
-            accountDTO.setRole(0);
-        }
-        Account acc = new Account(accountDTO);
-
-        Account res = accountRepository.save(acc);
+        accountDTO.setIsActive(true);
 
         return new ResponseObject("Success", "Register successfully",
-                new AccountDTO(res));
+                new AccountDTO(accountRepository.save(new Account(accountDTO))));
     }
 
     @Override
-    public ResponseObject banAccount(Long id) {
-        Account accountBanned = accountRepository.findById(id)
+    public ResponseObject banAccount(String id) {
+        Account accountBanned = accountRepository.findAccountById(id)
                 .map(account -> {
-                    account.setActive(false);
+                    account.setIsActive(false);
                     return accountRepository.save(account);
                 }).orElseGet(() -> {
                     return null;
@@ -70,5 +72,24 @@ public class AccountServiceImpl implements AccountService {
             return new ResponseObject("Fail", "Ban failure", "");
         }
         return new ResponseObject("Success", "Ban successfully", new AccountDTO(accountBanned));
+    }
+
+    @Override
+    public ResponseObject editAccount(AccountDTO accountDTO) {
+        return new ResponseObject("Success", "Updated successfully", new AccountDTO(accountRepository.save(new Account(accountDTO))));
+    }
+
+    @Override
+    public ResponseObject subComic(String id, String idComic) {
+        Account account = accountRepository.findAccountById(id)
+                .map(accountFound -> {
+                    if (accountFound.getSubscribeComicList() != null)
+                        accountFound.setSubscribeComicList(new ArrayList<>());
+                    accountFound.getSubscribeComicList().add(idComic);
+                    return accountRepository.save(accountFound);
+                }).orElseGet(() -> {
+                    return null;
+                });
+        return new ResponseObject("Success", "Subcribe successfully", new AccountDTO(account));
     }
 }

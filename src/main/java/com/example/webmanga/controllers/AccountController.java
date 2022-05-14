@@ -26,14 +26,23 @@ public class AccountController {
     }
 
     @PutMapping("/banAccount/{idUser}")
-    public ResponseEntity<ResponseObject> banAccount(@PathVariable Long idUser) {
+    public ResponseEntity<ResponseObject> banAccount(@PathVariable String idUser) {
         return ResponseEntity.ok(accountService.banAccount(idUser));
     }
 
     @PostMapping("/provideAccount")
     public ResponseEntity<ResponseObject> provideAccount(@RequestBody AccountDTO accountDTO) {
-        accountDTO.setRole(1);
         return ResponseEntity.ok(accountService.createAccount(accountDTO));
+    }
+
+    @PutMapping("/editAccount")
+    public ResponseEntity<ResponseObject> editAccount(@RequestBody AccountDTO accountDTO) {
+        return ResponseEntity.ok(accountService.editAccount(accountDTO));
+    }
+
+    @GetMapping("/subComic/{id}/{idComic}")
+    public ResponseEntity<ResponseObject> searchComics(@PathVariable String id, @PathVariable String idComic) {
+        return ResponseEntity.ok(accountService.subComic(id, idComic));
     }
 
 }

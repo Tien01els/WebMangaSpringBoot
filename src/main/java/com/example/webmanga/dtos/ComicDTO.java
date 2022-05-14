@@ -3,7 +3,6 @@ package com.example.webmanga.dtos;
 import com.example.webmanga.enums.Mode;
 import com.example.webmanga.entities.Comic;
 import lombok.*;
-import org.springframework.data.annotation.Transient;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,11 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ComicDTO {
-    @Transient
-    public static final String SEQUENCE_NAME = "comics_sequence";
     private String id;
     private String comicName;
-    private List<Long> author;
+    private List<String> author;
     private List<String> genres;
     private String status;
     private Long view;
