@@ -17,7 +17,7 @@ import java.util.List;
 public class ComicDTO {
     @Transient
     public static final String SEQUENCE_NAME = "comics_sequence";
-    private Long id;
+    private String id;
     private String comicName;
     private List<Long> author;
     private List<String> genres;

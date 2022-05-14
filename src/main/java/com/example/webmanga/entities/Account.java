@@ -17,7 +17,7 @@ import java.util.List;
 @Document(collection = "Account")
 public class Account {
     @Id
-    private Long id;
+    private String id;
     private String username;
     private String password;
     private boolean isActive;
@@ -32,11 +32,12 @@ public class Account {
         this.isActive = account.isActive();
         this.user = new User(account.getUser());
         this.role = account.getRole();
-        account.getSubscribeComicList().forEach(subscribeComic -> {
-            if (this.subscribeComicList == null) {
-                this.subscribeComicList = new ArrayList<>();
-            }
-            this.subscribeComicList.add(subscribeComic);
-        });
+        if(account.getSubscribeComicList() != null)
+            account.getSubscribeComicList().forEach(subscribeComic -> {
+                if (this.subscribeComicList == null) {
+                    this.subscribeComicList = new ArrayList<>();
+                }
+                this.subscribeComicList.add(subscribeComic);
+            });
     }
 }

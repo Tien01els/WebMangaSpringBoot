@@ -15,7 +15,7 @@ import java.util.List;
 public class AccountDTO {
     @Transient
     public static final String SEQUENCE_NAME = "accounts_sequence";
-    private Long id;
+    private String id;
     private String userName;
     private String password;
     private boolean isActive;
@@ -30,12 +30,13 @@ public class AccountDTO {
         this.isActive = account.isActive();
         this.user = new UserDTO(account.getUser());
         this.role = account.getRole();
-        account.getSubscribeComicList().forEach(subscribeComic -> {
-            if (this.subscribeComicList == null) {
-                this.subscribeComicList = new ArrayList<>();
-            }
-            this.subscribeComicList.add(subscribeComic);
-        });
+        if(account.getSubscribeComicList() != null)
+            account.getSubscribeComicList().forEach(subscribeComic -> {
+                if (this.subscribeComicList == null) {
+                    this.subscribeComicList = new ArrayList<>();
+                }
+                this.subscribeComicList.add(subscribeComic);
+            });
     }
 
 }

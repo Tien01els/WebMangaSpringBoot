@@ -21,7 +21,7 @@ import java.util.List;
 @Document(collection = "Comic")
 public class Comic {
     @Id
-    private Long id;
+    private String id;
     private String comicName;
     private List<Long> author;
     private List<String> genres;
@@ -33,7 +33,6 @@ public class Comic {
     private List<Chapter> listChap;
 
     public Comic(ComicDTO comic) {
-        this.id = comic.getId();
         this.comicName = comic.getComicName();
         comic.getAuthor().forEach(author -> {
             if (this.author == null) {

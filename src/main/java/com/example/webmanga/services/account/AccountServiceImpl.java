@@ -3,10 +3,8 @@ package com.example.webmanga.services.account;
 import com.example.webmanga.dtos.AccountDTO;
 import com.example.webmanga.dtos.UserDTO;
 import com.example.webmanga.entities.Account;
-import com.example.webmanga.global.GlobalVariable;
 import com.example.webmanga.response.ResponseObject;
 import com.example.webmanga.repositories.AccountRepository;
-import com.example.webmanga.services.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +14,6 @@ import java.util.Objects;
 public class AccountServiceImpl implements AccountService {
     @Autowired
     AccountRepository accountRepository;
-
-    @Autowired
-    SequenceGeneratorService sequenceGenerator;
 
     @Override
     public ResponseObject checkLogin(AccountDTO accountDTO) {
@@ -30,7 +25,6 @@ public class AccountServiceImpl implements AccountService {
         {
             return new ResponseObject("Fail", "Password invalid", "");
         }
-        GlobalVariable.accountID = account.getId();
         return new ResponseObject("Success", "Logged in successfully", new AccountDTO(account));
     }
 
@@ -44,7 +38,7 @@ public class AccountServiceImpl implements AccountService {
 
         UserDTO user = new UserDTO();
         user.setName(accountDTO.getUserName());
-        accountDTO.setId(sequenceGenerator.generateSequence(AccountDTO.SEQUENCE_NAME));
+        //accountDTO.setId(sequenceGenerator.generateSequence(AccountDTO.SEQUENCE_NAME));
         accountDTO.setUser(user);
         accountDTO.setActive(true);
 
@@ -54,9 +48,12 @@ public class AccountServiceImpl implements AccountService {
         } else if (accountDTO.getRole() == 0) {
             accountDTO.setRole(0);
         }
+        Account acc = new Account(accountDTO);
+
+        Account res = accountRepository.save(acc);
 
         return new ResponseObject("Success", "Register successfully",
-                new AccountDTO(accountRepository.save(new Account(accountDTO))));
+                new AccountDTO(res));
     }
 
     @Override
