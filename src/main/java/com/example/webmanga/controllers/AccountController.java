@@ -35,6 +35,7 @@ public class AccountController {
 
     @PostMapping("/provideAccount")
     public ResponseEntity<ResponseObject> provideAccount(@RequestBody AccountDTO accountDTO) {
+        accountDTO.setRole(1);
         return ResponseEntity.ok(accountService.createAccount(accountDTO));
     }
 

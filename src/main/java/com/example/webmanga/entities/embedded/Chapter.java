@@ -17,10 +17,12 @@ import java.util.List;
 @NoArgsConstructor
 
 public class Chapter {
+    private Integer chapterNumber;
     private String chapterName;
     private List<String> listChapterURL;
 
     public Chapter(ChapterDTO chapter) {
+        this.chapterNumber = chapter.getChapterNumber();
         this.chapterName = chapter.getChapterName();
         chapter.getListChapterURL().forEach(url -> {
             if (this.listChapterURL == null) {
