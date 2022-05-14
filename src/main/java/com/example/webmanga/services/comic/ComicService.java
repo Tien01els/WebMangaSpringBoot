@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 public interface ComicService {
     ResponseObject addComic(ComicDTO comicDTO);
     ResponseObject editComic(ComicDTO comicDTO);;
-    ResponseObject getComic(Long id);
+    ResponseObject getComicInfo(String id);
     ResponseObject searchComics(String name);
 }
